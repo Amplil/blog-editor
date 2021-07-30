@@ -31,6 +31,9 @@
         pre {
             padding: 20px;
         }
+        img{
+            width: 100%;
+        }
     </style>
 </head>
 
