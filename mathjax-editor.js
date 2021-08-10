@@ -125,26 +125,49 @@ function upfileClick() {
     }
 }
 */
+// ファイルの読み込み
+function load_file(){
+    let fileRef = document.getElementById('mdfile');
+    //var outFrame = document.getElementById('output');
+    if (1 <= fileRef.files.length) {
+        let file = fileRef.files[0];
+        let reader = new FileReader();
+        reader.readAsText(file, "utf-8");
+        reader.onload = function (theFile) {
+            let file_text = theFile.target.result;
+            //outhtml = outhtml.replace(/\r\n/g, '<br/>');
+            $('#editor_area').val(file_text);
+            preview_disp();
+            //editor_area.innerHTML = outhtml; // reader.result;
+            //$('#upfile_btn').removeClass('bg-warning');
+        }
+        //$('#reload-btn').css({'visibility': 'visible'}); // ファイル読み込みボタンを表示
+    }
+}
 // 読み込みファイルの内容が変わったとき
 $(function () {
+    $('#mdfile').on('click',function(){
+        this.value=null; // クリックしたときにファイル名を消すことで、再読み込み可能にする
+    });
     $('#mdfile').change(function(){
-        let fileRef = document.getElementById('mdfile');
-        //var outFrame = document.getElementById('output');
-        if (1 <= fileRef.files.length) {
-            let reader = new FileReader();
-            reader.onload = function (theFile) {
-                let file_text = theFile.target.result;
-                //outhtml = outhtml.replace(/\r\n/g, '<br/>');
-                $('#editor_area').val(file_text);
-                preview_disp();
-                //editor_area.innerHTML = outhtml; // reader.result;
-                //$('#upfile_btn').removeClass('bg-warning');
-            }
-            reader.readAsText(fileRef.files[0], "utf-8");
-        }
+        load_file();
     });
 });
 
+/*
+// ファイル再読み込みボタンが押されたとき
+$('#reload-btn').on('click', function(){
+    let fileRef = document.getElementById('mdfile');
+    //let temp=fileRef.value;
+    //console.log(this.value);
+    //this.value=null; // ファイル名を消すことで、再読み込み可能にする
+    //console.log(temp);
+    //fileRef.value=temp;
+    load_file();
+    //fileRef.value[0]=''; // ファイル名を消すことで、再読み込み可能にする
+    console.log("ファイル読み込み")
+});
+*/
 //$('[data-toggle="tooltip"]').tooltip();
 //$.widget.bridge('uitooltip', $.ui.tooltip);
 //$(target).find('[data-toggle="tooltip"]').tooltip();

@@ -19,18 +19,24 @@
     rel="stylesheet" 
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
     crossorigin="anonymous">
+    <!--
+    <style>
+        #reload-btn{
+            visibility: hidden;
+        }
+    </style>
+    -->
 </head>
 
 <body>
 <input type="file" accept=".md" id="mdfile" class="btn btn-secondary">
 <!-- <input id="upfile_btn" type="button" value="Markdownファイルをアップロード"> -->
+<!--<button id="reload-btn" class="btn btn-secondary">ファイルの再読み込み</button>-->
 <div class="row">
     <div class="col-5 m-1">
-        <!-- ここに入力-->
         <textarea name="article" id="editor_area" cols="30" rows="30" class="form-control"></textarea>
     </div>
     <div class="col-6 m-1 border">
-        <!-- ここに出力される -->
         <iframe src="blog-view.php" id="preview" width="100%" height="100%"></iframe>
     </div>
 </div>
