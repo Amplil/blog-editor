@@ -4,9 +4,11 @@ let previous_html="";
 let load_num=0;
 let plain_text=localStorage.getItem('plain_text');
 //console.log(plain_text);
-$('#editor_area').val(plain_text);
+if(plain_text==null){
+    plain_text="# mathjaxとmarkdownの両方に対応したブログエディタ\n## 例：ガウス積分\n$$ \\int_{-\\infty}^{\\infty} e^{-x^{2}} dx = \\sqrt{\\pi} $$";
+}
+editor_area.value=plain_text;
 preview_disp_scroll();
-
 $(function () {
     let event_flag=0;
     marked.setOptions({
@@ -73,11 +75,13 @@ function scroll_follow_up(){
 // マークダウンをプレビュー画面に表示する
 function preview_disp(){
     plain_text=$('#editor_area').val();
-    let html = marked(plain_text);
+    let html = marked.parse(plain_text);
+    //let html = plain_text;
+    console.log(plain_text);
     if(previous_html!=html){
         previous_html=html;
         load_num++;
-        console.log("load_num:",load_num);
+        //console.log("load_num:",load_num);
         localStorage.setItem('plain_text', plain_text);
         $.post({
             url: 'blog-text-save.php',
